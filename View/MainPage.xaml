@@ -6,9 +6,9 @@
     <CollectionView>
         <CollectionView.ItemsSource>
             <x:Array Type="{x:Type x:String}">
-                <x:String>Trams</x:String>
-                <x:String>Buses</x:String>
-                <x:String>Trains</x:String>
+                <x:String>Tramseses</x:String>
+                <x:String>Buseses</x:String>
+                <x:String>Trainseses</x:String>
             </x:Array>
         </CollectionView.ItemsSource>
     </CollectionView>
