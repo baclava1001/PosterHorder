@@ -5,6 +5,6 @@ namespace PosterHorder.Services
 {
     public interface ISearchMoviesService
     {
-        Task<SearchResult> GetMoviesSearchResultsFromAPI(string movieTitle);
+        Task<SearchResult> GetMoviesSearchResultsFromAPIAsync(string movieTitle);
     }
 }

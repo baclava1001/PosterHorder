@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using PosterHorder.Constants;
+using PosterHorder.Services;
 
 namespace PosterHorder
 {
@@ -20,6 +21,7 @@ namespace PosterHorder
     		builder.Logging.AddDebug();
 #endif
             builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddTransient<ISearchMoviesService, SearchMoviesService>();
             builder.Services.AddScoped(sp => new HttpClient
             {
                 BaseAddress = new Uri(ApiAddress.baseAddress)

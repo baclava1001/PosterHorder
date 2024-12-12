@@ -18,29 +18,36 @@ namespace PosterHorder.Services
         public string SearchString { get; set; }
 
 
-        public SearchMoviesService(HttpClient httpClient)
+        public SearchMoviesService(HttpClient httpClient, string? searchString)
         {
             _httpClient = httpClient;
+            if (searchString != null)
+            {
+                SearchString = searchString;
+            }
         }
 
-        public async Task<SearchResult> GetMoviesSearchResultsFromAPI(string movieTitle)
+        public async Task<SearchResult> GetMoviesSearchResultsFromAPIAsync(string movieTitle)
         {
             if(searchResult.Results.Count > 0)
             {
                 return searchResult;
             }
 
-            try
+            if (movieTitle != null)
             {
-                searchResult = await _httpClient.GetFromJsonAsync<SearchResult>($"{ApiAddress.baseAddress}/{SearchString}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+
+                try
+                {
+                    searchResult = await _httpClient.GetFromJsonAsync<SearchResult>($"{ApiAddress.baseAddress}/{SearchString}&{ApiAddress.apiKey}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
 
-            return searchResult;
-            
+            return searchResult;            
         }
     }
 }
