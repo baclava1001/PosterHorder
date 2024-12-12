@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PosterHorder.ViewModel
+namespace PosterHorder.ViewModels
 {
     public partial class BaseViewModel : ObservableObject
     {
@@ -20,6 +20,6 @@ namespace PosterHorder.ViewModel
         [ObservableProperty]
         string title;
 
-        public bool IsNotBusy => !isBusy;
+        public bool IsNotBusy => !IsBusy;
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PosterHorder.Model
+namespace PosterHorder.Models
 {
     public class Movie
     {

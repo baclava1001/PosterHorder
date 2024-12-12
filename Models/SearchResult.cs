@@ -1,4 +1,4 @@
-﻿namespace PosterHorder.Model
+﻿namespace PosterHorder.Models
 {
     public class SearchResult
     {

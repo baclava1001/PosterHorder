@@ -1,4 +1,6 @@
-﻿namespace PosterHorder
+﻿using PosterHorder.ViewModels;
+
+namespace PosterHorder
 {
     public partial class MainPage : ContentPage
     {

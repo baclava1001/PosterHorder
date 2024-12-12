@@ -1,5 +1,5 @@
 ﻿
-using PosterHorder.Model;
+using PosterHorder.Models;
 
 namespace PosterHorder.Services
 {

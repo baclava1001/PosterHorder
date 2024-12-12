@@ -1,4 +1,4 @@
-﻿using PosterHorder.Model;
+﻿using PosterHorder.Models;
 using PosterHorder.Services;
 using System;
 using System.Collections.Generic;
@@ -6,19 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PosterHorder.ViewModel
+namespace PosterHorder.ViewModels
 {
     public partial class SearchMoviesViewModel : BaseViewModel
     {
         private readonly ISearchMoviesService _searchMoviesService;
         
         [ObservableProperty]
-        string _searchString;
+        public string _searchString;
 
-        [ObservableProperty]
-        SearchResult _searchResult;
-
-        ObservableCollection<Movie> _movies;
+        public ObservableCollection<Movie> _movies;
 
         public SearchMoviesViewModel(ISearchMoviesService searchMoviesService)
         {
@@ -26,6 +23,7 @@ namespace PosterHorder.ViewModel
             _searchMoviesService = searchMoviesService;
         }
 
+        [RelayCommand]
         private async Task GetSearchResultAsync()
         {
             if (IsBusy)
@@ -36,11 +34,11 @@ namespace PosterHorder.ViewModel
                 // Local list to add all movies
                 List<Movie> moviesFromApi = new();
                 IsBusy = true;
-                var result = await _searchMoviesService.GetMoviesSearchResultsFromAPIAsync(_searchString);
+                var searchResult = await _searchMoviesService.GetMoviesSearchResultsFromAPIAsync(SearchString);
 
-                if (result.Results.Count > 0)
+                if (searchResult.Results.Count > 0)
                 {
-                    foreach (var movie in result.Results)
+                    foreach (var movie in searchResult.Results)
                     {
                         moviesFromApi.Add(movie);
                     }
@@ -50,7 +48,8 @@ namespace PosterHorder.ViewModel
             }
             catch (Exception ex)
             {
-
+                Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Sorry!", "Unable to get the requested Movie posters.", "Ok");
             }
             finally
             {

@@ -1,5 +1,5 @@
 ﻿using PosterHorder.Constants;
-using PosterHorder.Model;
+using PosterHorder.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace PosterHorder.Services
 {
     public class SearchMoviesService : ISearchMoviesService
     {
-        private readonly HttpClient _httpClient = new();
+        private readonly HttpClient _httpClient;
 
         private SearchResult searchResult;
 
@@ -43,7 +43,7 @@ namespace PosterHorder.Services
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Debug.WriteLine(ex);
                 }
             }
 
