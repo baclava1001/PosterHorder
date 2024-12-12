@@ -1,11 +1,7 @@
 ﻿using PosterHorder.Constants;
+using PosterHorder.Helpers;
 using PosterHorder.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PosterHorder.Services
 {
@@ -13,33 +9,27 @@ namespace PosterHorder.Services
     {
         private readonly HttpClient _httpClient;
 
-        private SearchResult searchResult;
+        private SearchResult _searchResult = new();
 
-        public string SearchString { get; set; }
-
-
-        public SearchMoviesService(HttpClient httpClient, string? searchString)
+        public SearchMoviesService(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            if (searchString != null)
-            {
-                SearchString = searchString;
-            }
         }
 
-        public async Task<SearchResult> GetMoviesSearchResultsFromAPIAsync(string movieTitle)
+
+        public async Task<SearchResult> GetMoviesSearchResultsFromAPIAsync(string searchStringFromviewModel)
         {
-            if(searchResult.Results.Count > 0)
+            if(_searchResult.Results != null && _searchResult.Results.Count > 0)
             {
-                return searchResult;
+                return _searchResult;
             }
 
-            if (movieTitle != null)
+            if (!string.IsNullOrEmpty(searchStringFromviewModel))
             {
 
                 try
                 {
-                    searchResult = await _httpClient.GetFromJsonAsync<SearchResult>($"{ApiAddress.baseAddress}/{SearchString}&{ApiAddress.apiKey}");
+                    _searchResult = await _httpClient.GetFromJsonAsync<SearchResult>(ApiRequestStringBuilder.BuildApiSearchRequest(searchStringFromviewModel));
                 }
                 catch (Exception ex)
                 {
@@ -47,7 +37,7 @@ namespace PosterHorder.Services
                 }
             }
 
-            return searchResult;            
+            return _searchResult;            
         }
     }
 }

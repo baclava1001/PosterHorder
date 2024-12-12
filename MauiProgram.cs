@@ -21,12 +21,12 @@ namespace PosterHorder
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-            builder.Services.AddSingleton<MainPage>();
-            builder.Services.AddSingleton<SearchMoviesViewModel>();
-            builder.Services.AddSingleton<ISearchMoviesService, SearchMoviesService>();
+            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<SearchMoviesViewModel>();
+            builder.Services.AddTransient<ISearchMoviesService, SearchMoviesService>();
             builder.Services.AddScoped(sp => new HttpClient
             {
-                BaseAddress = new Uri(ApiAddress.baseAddress)
+                BaseAddress = new Uri(ApiAddress.queryBaseAddress)
             });
             return builder.Build();
         }

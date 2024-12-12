@@ -4,9 +4,10 @@ namespace PosterHorder
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        public MainPage(SearchMoviesViewModel searchMoviesViewModel)
         {
             InitializeComponent();
+            this.BindingContext = searchMoviesViewModel;
         }
     }
 }

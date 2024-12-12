@@ -14,11 +14,11 @@ namespace PosterHorder.ViewModels
         }
 
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(IsNotBusy))]
-        bool isBusy;
+        private string title;
 
         [ObservableProperty]
-        string title;
+        [NotifyPropertyChangedFor(nameof(IsNotBusy))]
+        private bool isBusy;
 
         public bool IsNotBusy => !IsBusy;
     }

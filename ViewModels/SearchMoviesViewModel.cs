@@ -1,10 +1,6 @@
-﻿using PosterHorder.Models;
+﻿using PosterHorder.Helpers;
+using PosterHorder.Models;
 using PosterHorder.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PosterHorder.ViewModels
 {
@@ -15,15 +11,17 @@ namespace PosterHorder.ViewModels
         [ObservableProperty]
         public string _searchString;
 
-        public ObservableCollection<Movie> _movies;
+        [ObservableProperty]
+        public ObservableCollection<Movie> _movies = new();
 
         public SearchMoviesViewModel(ISearchMoviesService searchMoviesService)
         {
             Title = "Poster Horder";
             _searchMoviesService = searchMoviesService;
+            IsBusy = false;
         }
 
-        [RelayCommand]
+        [RelayCommand(CanExecute = nameof(IsNotBusy))]
         private async Task GetSearchResultAsync()
         {
             if (IsBusy)
@@ -36,15 +34,20 @@ namespace PosterHorder.ViewModels
                 IsBusy = true;
                 var searchResult = await _searchMoviesService.GetMoviesSearchResultsFromAPIAsync(SearchString);
 
-                if (searchResult.Results.Count > 0)
+                if (searchResult.Results != null && searchResult.Results.Count > 0)
                 {
                     foreach (var movie in searchResult.Results)
                     {
-                        moviesFromApi.Add(movie);
+                        if(!string.IsNullOrEmpty(movie.PosterPath))
+                        {
+                            string fullPosterPath = ApiRequestStringBuilder.BuildApiPosterRequest(movie.PosterPath);
+                            movie.PosterPath = fullPosterPath;
+                            moviesFromApi.Add(movie);
+                        }
                     }
+                    // Point the _movies ObservableCollection to the locally saved list
+                    Movies = new ObservableCollection<Movie>(moviesFromApi);
                 }
-                // Point the _movies ObservableCollection to the locally saved list
-                _movies = new ObservableCollection<Movie>(moviesFromApi);
             }
             catch (Exception ex)
             {

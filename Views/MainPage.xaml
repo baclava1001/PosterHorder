@@ -1,16 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PosterHorder.MainPage">
+             xmlns:models="clr-namespace:PosterHorder.Models"
+             xmlns:viewmodels="clr-namespace:PosterHorder.ViewModels"
+             x:DataType="viewmodels:SearchMoviesViewModel"
+             x:Class="PosterHorder.MainPage"
+             Title="{Binding Title}">
+    <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
+        <HorizontalStackLayout Spacing="5">
+            <Entry Placeholder="Search movie title" Text="{Binding SearchString}" MinimumWidthRequest="200"/>
+            <Button Text="Search" Command="{Binding GetSearchResultCommand}"/>
+        </HorizontalStackLayout>
 
-    <CollectionView>
-        <CollectionView.ItemsSource>
-            <x:Array Type="{x:Type x:String}">
-                <x:String>Tramseses</x:String>
-                <x:String>Buseses</x:String>
-                <x:String>Trainseses</x:String>
-            </x:Array>
-        </CollectionView.ItemsSource>
-    </CollectionView>
+        <CollectionView ItemsSource="{Binding Movies}" BackgroundColor="AliceBlue">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Movie">
+                    <Grid Padding="10">
+                        <Border HeightRequest="125">
+                            <Label Text="{Binding OriginalTitle}"/>
+                        </Border>
+                        <Image Source="{Binding PosterPath}"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
 
 </ContentPage>
