@@ -2,52 +2,54 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PosterHorder.Models
 {
+
     public class Movie
     {
-        [JsonProperty("adult")]
-        public bool? Adult { get; set; }
+        [JsonPropertyName("adult")]
+        public bool Adult { get; set; }
 
-        [JsonProperty("backdrop_path")]
-        public string? BackdropPath { get; set; }
+        [JsonPropertyName("backdrop_path")]
+        public string BackdropPath { get; set; }
 
-        [JsonProperty("genre_ids")]
-        public List<int?>? GenreIds { get; set; }
+        [JsonPropertyName("genre_ids")]
+        public List<int> GenreIds { get; set; }
 
-        [JsonProperty("id")]
-        public int? Id { get; set; }
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
 
-        [JsonProperty("original_language")]
-        public string? OriginalLanguage { get; set; }
+        [JsonPropertyName("original_language")]
+        public string OriginalLanguage { get; set; }
 
         [JsonProperty("original_title")]
-        public string? OriginalTitle { get; set; }
+        public string OriginalTitle { get; set; }
 
-        [JsonProperty("overview")]
-        public string? Overview { get; set; }
+        [JsonPropertyName("overview")]
+        public string Overview { get; set; }
 
-        [JsonProperty("popularity")]
-        public double? Popularity { get; set; }
+        [JsonPropertyName("popularity")]
+        public double Popularity { get; set; }
 
-        [JsonProperty("poster_path")]
-        public string? PosterPath { get; set; }
+        [JsonPropertyName("poster_path")]
+        public string PosterPath { get; set; }
 
-        [JsonProperty("release_date")]
-        public string? ReleaseDate { get; set; }
+        [JsonPropertyName("release_date")]
+        public string ReleaseDate { get; set; }
 
-        [JsonProperty("title")]
-        public string? Title { get; set; }
+        [JsonPropertyName("title")]
+        public string Title { get; set; }
 
-        [JsonProperty("video")]
-        public bool? Video { get; set; }
+        [JsonPropertyName("video")]
+        public bool Video { get; set; }
 
-        [JsonProperty("vote_average")]
-        public double? VoteAverage { get; set; }
+        [JsonPropertyName("vote_average")]
+        public double VoteAverage { get; set; }
 
-        [JsonProperty("vote_count")]
-        public int? VoteCount { get; set; }
+        [JsonPropertyName("vote_count")]
+        public int VoteCount { get; set; }
     }
 }

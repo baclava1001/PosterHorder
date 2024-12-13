@@ -12,7 +12,7 @@ namespace PosterHorder.ViewModels
         public string _searchString;
 
         [ObservableProperty]
-        public ObservableCollection<Movie> _movies = new();
+        public ObservableCollection<Movie> _movies;
 
         public SearchMoviesViewModel(ISearchMoviesService searchMoviesService)
         {
@@ -21,7 +21,7 @@ namespace PosterHorder.ViewModels
             IsBusy = false;
         }
 
-        [RelayCommand(CanExecute = nameof(IsNotBusy))]
+        [RelayCommand]
         private async Task GetSearchResultAsync()
         {
             if (IsBusy)
@@ -29,10 +29,15 @@ namespace PosterHorder.ViewModels
 
             try
             {
-                // Local list to add all movies
-                List<Movie> moviesFromApi = new();
                 IsBusy = true;
-                var searchResult = await _searchMoviesService.GetMoviesSearchResultsFromAPIAsync(SearchString);
+                // New local list to add all movies without triggering UI update for each one
+                List<Movie> moviesFromApi = new();
+                // Reset list class property
+                Movies = new();
+                // Reset variable
+                SearchResult searchResult = new();
+                
+                searchResult = await _searchMoviesService.GetMoviesSearchResultsFromAPIAsync(SearchString);
 
                 if (searchResult.Results != null && searchResult.Results.Count > 0)
                 {

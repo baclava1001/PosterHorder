@@ -8,7 +8,7 @@
              Title="{Binding Title}">
     <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
         <HorizontalStackLayout Spacing="5">
-            <Entry Placeholder="Search movie title" Text="{Binding SearchString}" MinimumWidthRequest="200"/>
+            <Entry Placeholder="Search movie title" Text="{Binding SearchString, Mode=OneWayToSource}" MinimumWidthRequest="200"/>
             <Button Text="Search" Command="{Binding GetSearchResultCommand}"/>
         </HorizontalStackLayout>
 

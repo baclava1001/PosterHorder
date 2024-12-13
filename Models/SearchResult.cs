@@ -1,17 +1,19 @@
-﻿namespace PosterHorder.Models
+﻿using System.Text.Json.Serialization;
+
+namespace PosterHorder.Models
 {
     public class SearchResult
     {
-        [JsonProperty("page")]
-        public int? Page { get; set; }
+        [JsonPropertyName("page")]
+        public int Page { get; set; }
 
-        [JsonProperty("results")]
-        public List<Movie>? Results { get; set; }
+        [JsonPropertyName("results")]
+        public List<Movie> Results { get; set; }
 
-        [JsonProperty("total_pages")]
-        public int? TotalPages { get; set; }
+        [JsonPropertyName("total_pages")]
+        public int TotalPages { get; set; }
 
-        [JsonProperty("total_results")]
-        public int? TotalResults { get; set; }
+        [JsonPropertyName("total_results")]
+        public int TotalResults { get; set; }
     }
 }

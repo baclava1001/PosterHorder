@@ -9,7 +9,7 @@ namespace PosterHorder.Services
     {
         private readonly HttpClient _httpClient;
 
-        private SearchResult _searchResult = new();
+        private SearchResult _searchResult;
 
         public SearchMoviesService(HttpClient httpClient)
         {
@@ -19,17 +19,21 @@ namespace PosterHorder.Services
 
         public async Task<SearchResult> GetMoviesSearchResultsFromAPIAsync(string searchStringFromviewModel)
         {
-            if(_searchResult.Results != null && _searchResult.Results.Count > 0)
-            {
-                return _searchResult;
-            }
+            //if(_searchResult.Results != null && _searchResult.Results.Count > 0)
+            //{
+            //    return _searchResult;
+            //}
+
+            _searchResult = new SearchResult();
 
             if (!string.IsNullOrEmpty(searchStringFromviewModel))
             {
 
                 try
                 {
-                    _searchResult = await _httpClient.GetFromJsonAsync<SearchResult>(ApiRequestStringBuilder.BuildApiSearchRequest(searchStringFromviewModel));
+                    var response = await _httpClient.GetAsync(ApiRequestStringBuilder.BuildApiSearchRequest(searchStringFromviewModel));
+
+                    _searchResult = await response.Content.ReadFromJsonAsync<SearchResult>();
                 }
                 catch (Exception ex)
                 {
