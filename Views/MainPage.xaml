@@ -6,24 +6,61 @@
              x:DataType="viewmodels:SearchMoviesViewModel"
              x:Class="PosterHorder.MainPage"
              Title="{Binding Title}">
-    <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
-        <HorizontalStackLayout Spacing="5">
-            <Entry Placeholder="Search movie title" Text="{Binding SearchString, Mode=OneWayToSource}" MinimumWidthRequest="200"/>
-            <Button Text="Search" Command="{Binding GetSearchResultCommand}"/>
-        </HorizontalStackLayout>
 
-        <CollectionView ItemsSource="{Binding Movies}" BackgroundColor="AliceBlue">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Movie">
-                    <Grid Padding="10">
-                        <Border HeightRequest="125">
-                            <Label Text="{Binding OriginalTitle}"/>
-                        </Border>
-                        <Image Source="{Binding PosterPath}"/>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout HorizontalOptions="Center"
+                         Spacing="5">
+            <!--Searchbar-->
+            <HorizontalStackLayout Spacing="5">
+                <Entry Placeholder="Search movie title"
+                   Text="{Binding SearchString, Mode=OneWayToSource}"
+                   MinimumWidthRequest="200"/>
+                <Button Text="Search"
+                    Command="{Binding GetSearchResultCommand}"
+                    IsEnabled="{Binding IsNotBusy}"/>
+            </HorizontalStackLayout>
 
+            <ActivityIndicator IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="CenterAndExpand"/>
+
+            <!--List of posters-->
+            <Grid HorizontalOptions="Center"
+            WidthRequest="300"
+              Padding="10">
+                <!--Card view-->
+                <CollectionView
+                ItemsSource="{Binding Movies}"
+                SelectionMode="Single"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Movie">
+                            <Grid RowDefinitions="*,*,*,*"
+                            Padding="5"
+                            Margin="0,10,0,10"  
+                            HorizontalOptions="Center">
+                                <Label Text="{Binding Title}"
+                                   FontAttributes="Bold"
+                                   FontSize="Micro"
+                                   Padding="0,5,5,0"
+                                   Grid.Row="0"/>
+                                <Image Source="{Binding PosterPath}"
+                                   Grid.Row="1"
+                                   HorizontalOptions="FillAndExpand"
+                                   Margin="0,3,0,5"/>
+                                <Label Text="{Binding ReleaseDate, StringFormat='Released: {0}'}"
+                                   FontSize="Caption"
+                                   Grid.Row="2"/>
+                                <Label Text="{Binding Overview}"
+                                   Grid.Row="3"
+                                   Margin="0,0,0,15"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
