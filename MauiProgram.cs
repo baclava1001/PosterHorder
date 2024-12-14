@@ -21,9 +21,14 @@ namespace PosterHorder
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-            builder.Services.AddTransient<MainPage>();
-            builder.Services.AddTransient<SearchMoviesViewModel>();
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<SearchMoviesViewModel>();
+
+            builder.Services.AddTransient<BigPosterPage>();
+            builder.Services.AddTransient<BigPosterViewModel>();
+            
             builder.Services.AddTransient<ISearchMoviesService, SearchMoviesService>();
+            
             builder.Services.AddScoped(sp => new HttpClient
             {
                 BaseAddress = new Uri(ApiAddress.queryBaseAddress)

@@ -6,3 +6,6 @@ global using System.ComponentModel;
 global using System.Diagnostics;
 global using System.Runtime.CompilerServices;
 global using System.Text.Json;
+global using PosterHorder.Models;
+global using PosterHorder.ViewModels;
+global using PosterHorder.Views;

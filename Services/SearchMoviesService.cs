@@ -31,9 +31,7 @@ namespace PosterHorder.Services
 
                 try
                 {
-                    var response = await _httpClient.GetAsync(ApiRequestStringBuilder.BuildApiSearchRequest(searchStringFromviewModel));
-
-                    _searchResult = await response.Content.ReadFromJsonAsync<SearchResult>();
+                    _searchResult = await _httpClient.GetFromJsonAsync<SearchResult>(ApiRequestStringBuilder.BuildApiSearchRequest(searchStringFromviewModel));
                 }
                 catch (Exception ex)
                 {

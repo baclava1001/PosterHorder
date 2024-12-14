@@ -1,6 +1,7 @@
 ﻿using PosterHorder.Helpers;
 using PosterHorder.Models;
 using PosterHorder.Services;
+using PosterHorder.Views;
 
 namespace PosterHorder.ViewModels
 {
@@ -63,6 +64,22 @@ namespace PosterHorder.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        [RelayCommand]
+        private async Task GoToBigPosterPageAsync(Movie movie)
+        {
+            if (movie is null || movie.PosterPath is null)
+            {
+                return;
+            }
+
+            // TODO: Remove string concatination below?
+            await Shell.Current.GoToAsync($"{nameof(BigPosterPage)}", true,
+                new Dictionary<string, object>
+                {
+                    { "Movie", movie }
+                });
         }
     }
 }
