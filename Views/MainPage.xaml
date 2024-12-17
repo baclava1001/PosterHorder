@@ -3,18 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:PosterHorder.Models"
              xmlns:viewmodel="clr-namespace:PosterHorder.ViewModels"
+             xmlns:ic="clr-namespace:FluentIcons.Maui;assembly=FluentIcons.Maui"
              x:DataType="viewmodel:SearchMoviesViewModel"
-             x:Class="PosterHorder.MainPage"
-             Title="{Binding Title}">
+             x:Class="PosterHorder.MainPage">
 
     <ScrollView HorizontalOptions="Center">
         <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
             <!--Searchbar-->
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Margin="0,20,0,0">
                 <Entry Placeholder="Search movie title"
                        Text="{Binding SearchString, Mode=OneWayToSource}"
                        MinimumWidthRequest="200"/>
                 <Button Text="Search"
+                        BackgroundColor="#ff00bfff"
                         Command="{Binding GetSearchResultCommand}"
                         IsEnabled="{Binding IsNotBusy}"/>
             </HorizontalStackLayout>
@@ -46,9 +47,13 @@
                                       HorizontalOptions="Center">
                                     <Label Text="{Binding Title}"
                                            FontAttributes="Bold"
-                                           FontSize="Micro"
+                                           FontSize="Body"
                                            Padding="0,5,5,0"
                                            Grid.Row="0"/>
+                                    <ContentView HorizontalOptions="End">
+                                        <ic:SymbolIcon Symbol="BookmarkAdd"
+                                                   Grid.Row="0"/>
+                                    </ContentView>
                                     <Image Source="{Binding PosterPath}"
                                            Grid.Row="1"
                                            HorizontalOptions="FillAndExpand"

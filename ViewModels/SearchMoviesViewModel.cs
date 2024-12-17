@@ -74,8 +74,7 @@ namespace PosterHorder.ViewModels
                 return;
             }
 
-            // TODO: Remove string concatination below?
-            await Shell.Current.GoToAsync($"{nameof(BigPosterPage)}", true,
+            await Shell.Current.GoToAsync(nameof(BigPosterPage), true,
                 new Dictionary<string, object>
                 {
                     { "Movie", movie }

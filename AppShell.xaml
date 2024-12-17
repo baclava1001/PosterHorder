@@ -3,13 +3,22 @@
     x:Class="PosterHorder.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ic="clr-namespace:FluentIcons.Maui;assembly=FluentIcons.Maui"
     xmlns:local="clr-namespace:PosterHorder"
     xmlns:views="clr-namespace:PosterHorder.Views"
     FlyoutBehavior="Disabled">
 
-    <!--xmlns:views="clr-namespace:PosterHorder.Views"-->
-    
-
+    <Shell.TitleView>
+        <Grid HorizontalOptions="FillAndExpand"
+              BackgroundColor="Transparent">
+            <Label Text="Poster Horder"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   FontFamily="HollywoodHillsBold"
+                   FontSize="45"
+                   TextColor="DeepSkyBlue"/>
+        </Grid>
+    </Shell.TitleView>
 
     <TabBar>
         <Tab Title="Search">
