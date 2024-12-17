@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PosterHorder.Views.BigPosterPage"
              xmlns:viewmodel="clr-namespace:PosterHorder.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodel:BigPosterViewModel"
              Title=""
              BackgroundColor="Black"
@@ -19,6 +20,12 @@
         </Grid.GestureRecognizers>
         <Image Source="{Binding Movie.PosterPath}"
                Aspect="AspectFit"
-               BackgroundColor="Black"/>
+               BackgroundColor="Black">
+            <!--<Image.Behaviors>
+                <toolkit:TouchBehavior LongPressCommandParameter="{Binding Movie}"
+                                       LongPressCommand="{Binding Source={viewmodel:BigPosterViewModel}, Path=BigPosterViewModel.SavePosterToDeviceCommand}"
+                                       LongPressDuration="750"/>
+            </Image.Behaviors>-->
+        </Image>
     </Grid>
 </ContentPage>

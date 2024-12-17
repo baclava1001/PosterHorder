@@ -15,12 +15,14 @@ namespace PosterHorder.ViewModels
         [ObservableProperty]
         public ObservableCollection<Movie> _movies;
 
+
         public SearchMoviesViewModel(ISearchMoviesService searchMoviesService)
         {
             Title = "Poster Horder";
             _searchMoviesService = searchMoviesService;
             IsBusy = false;
         }
+
 
         [RelayCommand]
         private async Task GetSearchResultAsync()
@@ -65,6 +67,7 @@ namespace PosterHorder.ViewModels
                 IsBusy = false;
             }
         }
+
 
         [RelayCommand]
         private async Task GoToBigPosterPageAsync(Movie movie)

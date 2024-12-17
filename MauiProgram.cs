@@ -1,4 +1,5 @@
-﻿using FluentIcons.Maui;
+﻿using CommunityToolkit.Maui;
+using FluentIcons.Maui;
 using Microsoft.Extensions.Logging;
 using PosterHorder.Constants;
 using PosterHorder.Services;
@@ -13,6 +14,7 @@ namespace PosterHorder
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .UseFluentIcons(true)
                 .ConfigureFonts(fonts =>
                 {
@@ -31,6 +33,7 @@ namespace PosterHorder
             builder.Services.AddTransient<BigPosterViewModel>();
             
             builder.Services.AddTransient<ISearchMoviesService, SearchMoviesService>();
+            builder.Services.AddTransient<ISavePosterService, SavePosterService>();
             
             builder.Services.AddScoped(sp => new HttpClient
             {

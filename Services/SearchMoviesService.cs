@@ -19,11 +19,6 @@ namespace PosterHorder.Services
 
         public async Task<SearchResult> GetMoviesSearchResultsFromAPIAsync(string searchStringFromviewModel)
         {
-            //if(_searchResult.Results != null && _searchResult.Results.Count > 0)
-            //{
-            //    return _searchResult;
-            //}
-
             _searchResult = new SearchResult();
 
             if (!string.IsNullOrEmpty(searchStringFromviewModel))
